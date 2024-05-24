@@ -1,13 +1,19 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import DrawerNavigator from './DrawerNavigator';
+import DetailScreen from '../screens/DetailScreen';
+import Cars from '../screens/Cars';
 
-const Stack = createStackNavigator();
+import { sharedTransitionSpec } from './config/transitionConfig'; // Adjust the path as needed
+const Stack = createSharedElementStackNavigator();
 
 const MainStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Drawer" component={DrawerNavigator} options={{ headerShown: false }} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Drawer" component={DrawerNavigator}/>
+      <Stack.Screen name="Detail" component={DetailScreen} options={{...sharedTransitionSpec}} />
+      <Stack.Screen name="Cars" component={DetailScreen} options={{...sharedTransitionSpec}} />
+    
     </Stack.Navigator>
   );
 };
